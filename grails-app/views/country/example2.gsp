@@ -22,20 +22,6 @@
 
       <g:form action="example3" method="post" >
 
- <r:script disposition='head'>
-$(document).ready(function() {
-		$('#citySearch').focus(function() {
-			countryValue = $('#hiddenField').val();
-			$('#citySearch').attr('cid',countryValue);
-			window.alert(countryValue);
-	});
-	//$('#countrySearch').change(function() {
-	//	val = $('#countrySearch').val();
-	//	window.alert(val);
-	//	//$("#citySearch").attr('countryUid',val)
-	//});
-});
-</r:script>
 
 
 <label>Country:</label>

@@ -1,31 +1,16 @@
 class BootStrap {
 
     def init = { servletContext ->
+    	def c1 = Country.findOrSaveWhere(name:'United Kingdom',ccode:'GB',language:'')
+    	def c2 = Country.findOrSaveWhere(name:'United States',ccode:'US',language:'')
 		
-		final String COUNTRY1 = 'United Kingdom'
-		final String COUNTRY2 = 'United States'
-		final String CITY1='London'
-		final String CITY2='Manchester'
-		final String CITY3='Manhatten'
-		final String CITY4='Chicago'
-		if (!Country.findByName(COUNTRY1)) {
-			new Country(name:COUNTRY1,ccode:'GB',language:'').save()
-		}
-		if (!Country.findByName(COUNTRY2)) {
-			new Country(name:COUNTRY2,ccode:'US',language:'').save()
-		}
-		//if (!City.findByName(CITY1)) {
-		//	new City(country:'1', name:CITY1,ccode:'GB').save()
-		//}
-		if (!City.findByName(CITY2)) {
-			new City(country:COUNTRY1, name:CITY2,ccode:'GB').save()
-		}
-		//if (!City.findByName(CITY3)) {
-		//	new City(country_Id:'2', name:CITY3,ccode:'US').save()
-		//}
-		//if (!City.findByName(CITY4)) {
-		//	new City(country_id:'2', name:CITY4,ccode:'US').save()
-		//}
+		City.findOrSaveWhere(country:c1,name:'Manchester',ccode:'GB')
+		City.findOrSaveWhere(country:c1,name:'London',ccode:'GB')
+		City.findOrSaveWhere(country:c1,name:'Charlton',ccode:'GB')
+
+		City.findOrSaveWhere(country:c2,name:'Manhatten',ccode:'GB')
+		City.findOrSaveWhere(country:c2,name:'Chicago',ccode:'GB')
+		City.findOrSaveWhere(country:c2,name:'Los Angeles',ccode:'GB')
     }
     def destroy = {
     }

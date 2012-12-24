@@ -3,14 +3,15 @@
 /**
  * @author Alidad Soleimani
  */
-	
-class AnyController {
-	def autoCompleteService
+
+ class AnyController {
+ 	def autoCompleteService
 	//AutoCompleteService autoCompleteService
 	def autocompleteAction= {
 		render autoCompleteService.autocompleteAction(params)
 	}
-	def autocompleteCountry= {
+
+	def autocompleteCountry= {	
 		render autoCompleteService.autocompleteCountry(params)
 	}
 	def autocompleteCityAction= {

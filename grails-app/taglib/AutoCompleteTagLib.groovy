@@ -46,35 +46,23 @@
                     out << "<script type='text/javascript'>"
 					
                     out << " \$(document).ready(function() {"
-
-					
-					/////////////////////////////////////////////
-					out << "\$('#" + attrs.id+"').focus(function() {"
-					out << "alert('____'+countryValue);"
-					out <<"});"
-					/////////////////////////////////////////////
-					
 					
 		
                     out << "\$('#" + attrs.id+"').autocomplete({ "
-                    out << " source: '"
+                    out << " source: "
+                    out << " function(request, response) { "
+                    out << " \$.getJSON(' "
                     out << createLink(link)
                     out << "?"
-					
-					/////////////////////////////////////////////
-					//out << "&countryUid=";
-					//out << "+countryValue+"
-					//out << "&countryUid="+attrs.cid
-					out << "&countryid="+attrs.countryid
-					
-					/////////////////////////////////////////////
-					
+                    out << "term=' + request.term + '"
 					out << "&domain="+ attrs.domain
                     out << "&searchField="+attrs.searchField
                     out << "&max="+attrs.max
                     out << "&order="+attrs.order
                     out << "&collectField="+attrs.collectField
-                    out << "', dataType: 'json'"
+                    out << "', { countryid: \$('#hiddenField').val() },  "
+                    out << " response);  } "
+                    out << ", dataType: 'json'"
                     out << "});});"
                     out << "</script>"
             }

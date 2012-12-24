@@ -27,26 +27,21 @@ class AutoCompleteService {
 	}
 
 	def autocompleteCityAction (params) {	
-		def domainClass = grailsApplication.getDomainClass(params.domain).clazz
-		def results = domainClass.createCriteria().list {
-			eq 'country.id', (Long.valueOf(params.countryid))
+		
+		def results = City.createCriteria().list {
+			country {
+				eq('id',params.countryid as Long)
+			}
 			ilike params.searchField, params.term + '%'
-			maxResults(Integer.parseInt(params.max,10))
 			order(params.searchField, params.order)
 		}
-		if (results.size()< 5){
-			results = domainClass.createCriteria().list {		
-				eq 'country.id',  (Long.valueOf(params.countryid))
-				ilike params.searchField, "%${params.term}%"
-				maxResults(Integer.parseInt(params.max,10))
-				order(params.searchField, params.order)
-			}
-		}
+		
 		results = results.collect {	[label:it."${params.collectField}"] }.unique()
 		return results as JSON
 	}
 	
 	def autocompleteCountry (params) {
+
 		def domainClass = grailsApplication.getDomainClass(params.domain).clazz
 		def query = { 
 			or{
